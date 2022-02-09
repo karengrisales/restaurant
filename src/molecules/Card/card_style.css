@@ -1,26 +1,18 @@
 .card {
   display: flex;
   margin: auto;
-  padding-top: 80px;
   color: #2a363b;
   flex-direction: column;
   align-items: center;
+  margin-top: 30px;
 }
-.card__main {
+
+.card__front {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #2a363b;
   border: 1px solid;
-}
-
-.card__img {
-  width: 280px;
-  height: 280px;
-}
-
-.card__img:hover {
-  filter: opacity(0.5);
 }
 
 .card__title {
@@ -33,13 +25,12 @@
   color: #2a363b;
 }
 
-.card__description {
+.card__characteristics {
   display: flex;
   border: 1px solid;
-  border-top: 0;
   align-items: center;
   justify-content: center;
-  width: 225px;
+  width: 226px;
 }
 
 .card__imgShopping {
@@ -52,4 +43,34 @@
   opacity: 50%;
   -webkit-transform: scale(1.3);
   transform: scale(0.7);
+}
+
+.card__container {
+  width: 226px;
+  height: 253px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 1s ease;
+}
+
+.card__front,
+.card__back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  border: 1px solid;
+}
+
+.card__back {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card:hover .card__container {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
