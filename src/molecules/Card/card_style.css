@@ -68,9 +68,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f3d1d1;
+  font-weight: bold;
 }
 
 .card:hover .card__container {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
+}
+
+.card__img {
+  width: 226px;
+  height: 230px;
 }

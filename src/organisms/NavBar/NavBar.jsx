@@ -36,12 +36,6 @@ export const NavBar = () => {
         >
           Postres
         </NavLink>
-        <NavLink
-          to="/food"
-          className={({ isActive }) => (isActive ? "active" : "desactive")}
-        >
-          Template
-        </NavLink>
       </ul>
     </nav>
   );

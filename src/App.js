@@ -7,6 +7,7 @@ import { Dessert } from "./pages/Dessert/Dessert";
 import { Food } from "./templates/Food/Food";
 import { NavBar } from "./organisms/NavBar/NavBar";
 import { Footer } from "./organisms/Footer/Footer";
+import { FormAdd } from "./molecules/FormAdd/FormAdd";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/drink" element={<Drink />}></Route>
         <Route path="/dessert" element={<Dessert />}></Route>
         <Route path="/food" element={<Food />}></Route>
+        <Route path="/add" element={<FormAdd />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>
