@@ -1,0 +1,8 @@
+.container__template {
+  width: 60%;
+  margin: auto;
+  margin-bottom: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

@@ -1,0 +1,17 @@
+.container__home {
+  display: flex;
+  height: 92vh;
+  background-image: url(../../assets/img/wallpaper.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #000;
+  padding-top: 60px;
+  justify-content: right;
+  align-items: center;
+}
+
+.container__title {
+  font-size: 700%;
+  margin-right: 17%;
+}
