@@ -1,0 +1,26 @@
+nav {
+  background-color: #cf4647;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+}
+
+.desactive {
+  color: #f8f6f6;
+  text-decoration: none;
+  padding: 0.5em;
+}
+
+.active {
+  color: #f5d061;
+  text-decoration: none;
+  padding: 0.5em;
+}
+
+.profileimg {
+  height: 20px;
+  margin-right: 25px;
+  margin-top: 5px;
+}
