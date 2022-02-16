@@ -1,9 +1,7 @@
 .card {
   display: flex;
-  margin: auto;
   color: #2a363b;
   flex-direction: column;
-  align-items: center;
   margin-top: 30px;
   padding: 5px;
 }
@@ -13,12 +11,15 @@
   flex-direction: column;
   align-items: center;
   color: #2a363b;
-  border: 1px solid;
 }
 
 .card__title {
   font-size: 150%;
   font-weight: bold;
+  width: 226px;
+  text-align: center;
+  border: 1px solid;
+  border-top: 0;
 }
 
 .card__price {
@@ -29,6 +30,7 @@
 .card__characteristics {
   display: flex;
   border: 1px solid;
+  border-top: 0;
   align-items: center;
   justify-content: center;
   width: 226px;
@@ -48,7 +50,7 @@
 
 .card__container {
   width: 226px;
-  height: 253px;
+  height: 230px;
   position: relative;
   transform-style: preserve-3d;
   transition: 1s ease;
@@ -60,7 +62,6 @@
   height: 100%;
   position: absolute;
   backface-visibility: hidden;
-  border: 1px solid;
 }
 
 .card__back {
@@ -69,8 +70,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f3d1d1;
   font-weight: bold;
+  border: 1px solid;
 }
 
 .card:hover .card__container {
@@ -81,4 +82,5 @@
 .card__img {
   width: 226px;
   height: 230px;
+  border: 1px solid;
 }

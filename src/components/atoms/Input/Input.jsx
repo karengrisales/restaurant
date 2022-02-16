@@ -2,7 +2,7 @@ import React from "react";
 import "./input_styles.css";
 
 export const Input = (props) => {
-  const { tag, type, name, placeholder, capture } = props;
+  const { tag, type, name, placeholder, capture, text, regex } = props;
 
   return (
     <div className="container__input">
@@ -14,6 +14,7 @@ export const Input = (props) => {
         placeholder={placeholder}
         onChange={(e) => capture(e)}
       />
+      <p className="container__p">{text}</p>
     </div>
   );
 };

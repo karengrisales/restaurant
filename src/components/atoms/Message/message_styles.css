@@ -1,0 +1,18 @@
+.alert__img {
+  padding-right: 5px;
+  height: 15px;
+}
+
+.check__img {
+  padding-right: 5px;
+  height: 15px;
+}
+
+.container__message--alert {
+  color: #f44336;
+}
+
+.container__message--check {
+  color: #4caf50;
+  font-weight: bold;
+}

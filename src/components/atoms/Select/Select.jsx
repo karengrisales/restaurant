@@ -6,7 +6,7 @@ export const Select = (props) => {
 
   return (
     <div className="container__select">
-      <p>{text}</p>
+      <p className="container__p--select">{text}</p>
       <select name={name} defaultValue="" onChange={(e) => capture(e)}>
         {options.map((option, index) => {
           return <option key={index}>{option.label}</option>;

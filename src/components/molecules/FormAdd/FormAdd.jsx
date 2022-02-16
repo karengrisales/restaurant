@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Button } from "../../atoms/Button/Button";
 import { Input } from "../../atoms/Input/Input";
+import { Message } from "../../atoms/Message/Message";
 import { Select } from "../../atoms/Select/Select";
 import "./form_style.css";
 
@@ -121,6 +122,8 @@ export const FormAdd = () => {
         type="text"
         name="name"
         placeholder="Ingresa el nombre"
+        text="Por favor ingresa el nombre del plato"
+        regex=""
         capture={captureName}
       />
       <Input
@@ -128,6 +131,8 @@ export const FormAdd = () => {
         type="number"
         name="price"
         placeholder="Ingrese el precio"
+        text="Por favor ingresa el precio del plato"
+        regex=""
         capture={capturePrice}
       />
       <Input
@@ -135,6 +140,8 @@ export const FormAdd = () => {
         type="text"
         name="description"
         placeholder="Ingrese la desccripción"
+        text="Por favor ingresa la descripción del plato"
+        regex=""
         capture={captureDescription}
       />
       <Input
@@ -142,9 +149,14 @@ export const FormAdd = () => {
         type="text"
         name="image"
         placeholder="Ingrese la URL de la imagen"
+        text="Por favor ingresa la URL de la imagen"
+        regex=""
         capture={captureImage}
       />
-      <Button name="Agregar" action={choose} />
+      <div className="form__button">
+        <Button name="Agregar" action={choose} className="form__button" />
+      </div>
+      {false && <Message text="check" />}
     </form>
   );
 };
