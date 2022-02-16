@@ -1,0 +1,12 @@
+.container__select {
+  display: flex;
+  flex-direction: column;
+  width: 173px;
+  text-align: center;
+}
+
+select {
+  border: 2px solid #808080;
+  padding: 2px;
+  border-radius: 5px;
+}

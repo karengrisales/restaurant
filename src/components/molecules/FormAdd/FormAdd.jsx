@@ -1,20 +1,28 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "../../atoms/Button/Button";
 import { Input } from "../../atoms/Input/Input";
+import { Select } from "../../atoms/Select/Select";
 import "./form_style.css";
 
 export const FormAdd = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [desserts, setDesserts] = useState(null);
+  const [food, setFood] = useState("");
+  const [image, setImage] = useState("");
+  const [soup, setSoup] = useState(null);
+  const [maincourse, setMainCourse] = useState(null);
+  const [drink, setDrink] = useState(null);
+  const [dessert, setDessert] = useState(null);
 
-  useEffect(() => {
-    axios.get("http://localhost:8081/postres").then((response) => {
-      setDesserts(response.data);
-    });
-  }, []);
+  const options = [
+    { value: "elected", label: "Seleccione" },
+    { value: "soup", label: "Sopa" },
+    { value: "maincourse", label: "Plato Fuerte" },
+    { value: "drink", label: "Bebida" },
+    { value: "dessert", label: "Postre" },
+  ];
 
   function createDessert() {
     axios
@@ -22,15 +30,63 @@ export const FormAdd = () => {
         name: name,
         description: description,
         price: price,
+        img: image,
       })
       .then((response) => {
-        setDesserts(response.data);
+        setDessert(response.data);
       });
-
-    console.log();
   }
 
-  if (!desserts) return "No desserts!";
+  function createSoup() {
+    axios
+      .post("http://localhost:8081/sopas", {
+        name: name,
+        description: description,
+        price: price,
+        img: image,
+      })
+      .then((response) => {
+        setSoup(response.data);
+      });
+  }
+
+  function createMainCourse() {
+    axios
+      .post("http://localhost:8081/principales", {
+        name: name,
+        description: description,
+        price: price,
+        img: image,
+      })
+      .then((response) => {
+        setMainCourse(response.data);
+      });
+  }
+
+  function createDrink() {
+    axios
+      .post("http://localhost:8081/bebidas", {
+        name: name,
+        description: description,
+        price: price,
+        img: image,
+      })
+      .then((response) => {
+        setDrink(response.data);
+      });
+  }
+
+  function choose() {
+    if (food === "Sopa") {
+      createSoup();
+    } else if (food === "Postre") {
+      createDessert();
+    } else if (food === "Bebida") {
+      createDrink();
+    } else if (food === "Plato Fuerte") {
+      createMainCourse();
+    }
+  }
 
   function captureName(e) {
     setName(e.target.value);
@@ -44,8 +100,22 @@ export const FormAdd = () => {
     setPrice(e.target.value);
   }
 
+  function captureImage(e) {
+    setImage(e.target.value);
+  }
+
+  function captureFood(e) {
+    setFood(e.target.value);
+  }
+
   return (
     <form className="form__add">
+      <Select
+        name={food}
+        options={options}
+        text="Por favor elija el tipo de comida a agregar:"
+        capture={captureFood}
+      />
       <Input
         tag="Nombre"
         type="text"
@@ -67,7 +137,14 @@ export const FormAdd = () => {
         placeholder="Ingrese la desccripción"
         capture={captureDescription}
       />
-      <Button name="Agregar" action={createDessert} />
+      <Input
+        tag="URL Imagen"
+        type="text"
+        name="image"
+        placeholder="Ingrese la URL de la imagen"
+        capture={captureImage}
+      />
+      <Button name="Agregar" action={choose} />
     </form>
   );
 };
