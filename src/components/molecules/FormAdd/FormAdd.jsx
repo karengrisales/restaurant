@@ -7,11 +7,12 @@ import { Select } from "../../atoms/Select/Select";
 import "./form_style.css";
 
 export const FormAdd = () => {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [food, setFood] = useState("");
-  const [image, setImage] = useState("");
+  const [food, setFood] = useState({ field: "", valid: null });
+  const [name, setName] = useState({ field: "", valid: null });
+  const [price, setPrice] = useState({ field: "", valid: null });
+  const [description, setDescription] = useState({ field: "", valid: null });
+  const [image, setImage] = useState({ field: "", valid: null });
+  const [validForm, setValidForm] = useState(null);
   const [soup, setSoup] = useState(null);
   const [maincourse, setMainCourse] = useState(null);
   const [drink, setDrink] = useState(null);
@@ -25,13 +26,19 @@ export const FormAdd = () => {
     { value: "dessert", label: "Postre" },
   ];
 
+  const expressions = {
+    text: /^[a-zA-ZÀ-ÿ\s]{3,40}$/,
+    url: /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/,
+    price: /^\d{3,6}$/,
+  };
+
   function createDessert() {
     axios
       .post("http://localhost:8081/postres", {
-        name: name,
-        description: description,
-        price: price,
-        img: image,
+        name: name.field,
+        description: description.field,
+        price: price.field,
+        img: image.field,
       })
       .then((response) => {
         setDessert(response.data);
@@ -41,10 +48,10 @@ export const FormAdd = () => {
   function createSoup() {
     axios
       .post("http://localhost:8081/sopas", {
-        name: name,
-        description: description,
-        price: price,
-        img: image,
+        name: name.field,
+        description: description.field,
+        price: price.field,
+        img: image.field,
       })
       .then((response) => {
         setSoup(response.data);
@@ -54,10 +61,10 @@ export const FormAdd = () => {
   function createMainCourse() {
     axios
       .post("http://localhost:8081/principales", {
-        name: name,
-        description: description,
-        price: price,
-        img: image,
+        name: name.field,
+        description: description.field,
+        price: price.field,
+        img: image.field,
       })
       .then((response) => {
         setMainCourse(response.data);
@@ -67,96 +74,111 @@ export const FormAdd = () => {
   function createDrink() {
     axios
       .post("http://localhost:8081/bebidas", {
-        name: name,
-        description: description,
-        price: price,
-        img: image,
+        name: name.field,
+        description: description.field,
+        price: price.field,
+        img: image.field,
       })
       .then((response) => {
         setDrink(response.data);
       });
   }
 
-  function choose() {
-    if (food === "Sopa") {
-      createSoup();
-    } else if (food === "Postre") {
-      createDessert();
-    } else if (food === "Bebida") {
-      createDrink();
-    } else if (food === "Plato Fuerte") {
-      createMainCourse();
+  const choose = () => {
+    if (
+      food.valid === "true" &&
+      name.valid === "true" &&
+      description.valid === "true" &&
+      image.valid === "true" &&
+      price.valid === "true"
+    ) {
+      if (food.field === "Sopa") {
+        createSoup();
+      } else if (food.field === "Postre") {
+        createDessert();
+      } else if (food.field === "Bebida") {
+        createDrink();
+      } else if (food.field === "Plato Fuerte") {
+        createMainCourse();
+      }
     }
-  }
+  };
 
-  function captureName(e) {
-    setName(e.target.value);
-  }
-
-  function captureDescription(e) {
-    setDescription(e.target.value);
-  }
-
-  function capturePrice(e) {
-    setPrice(e.target.value);
-  }
-
-  function captureImage(e) {
-    setImage(e.target.value);
-  }
-
-  function captureFood(e) {
-    setFood(e.target.value);
-  }
+  const submitForm = (e) => {
+    e.preventDefault();
+    if (
+      food.valid === "true" &&
+      name.valid === "true" &&
+      description.valid === "true" &&
+      image.valid === "true" &&
+      price.valid === "true"
+    ) {
+      setValidForm(true);
+      setFood({ valid: null });
+      setName({ field: "", valid: null });
+      setPrice({ field: "", valid: null });
+      setDescription({ field: "", valid: null });
+      setImage({ field: "", valid: null });
+    } else {
+      setValidForm(false);
+    }
+  };
 
   return (
-    <form className="form__add">
+    <form className="form__add" onSubmit={submitForm}>
       <Select
         name={food}
         options={options}
         text="Por favor elija el tipo de comida a agregar:"
-        capture={captureFood}
+        status={food}
+        cambio={setFood}
+        textError="Por favor selecciona una opción"
       />
       <Input
         tag="Nombre"
         type="text"
         name="name"
         placeholder="Ingresa el nombre"
-        text="Por favor ingresa el nombre del plato"
-        regex=""
-        capture={captureName}
+        textError="Por favor ingresa el nombre del plato"
+        regex={expressions.text}
+        status={name}
+        changeStatus={setName}
       />
       <Input
         tag="Precio"
         type="number"
         name="price"
         placeholder="Ingrese el precio"
-        text="Por favor ingresa el precio del plato"
-        regex=""
-        capture={capturePrice}
+        textError="Por favor ingresa el precio del plato"
+        regex={expressions.price}
+        status={price}
+        changeStatus={setPrice}
       />
       <Input
         tag="Descripción"
         type="text"
         name="description"
         placeholder="Ingrese la desccripción"
-        text="Por favor ingresa la descripción del plato"
-        regex=""
-        capture={captureDescription}
+        textError="Por favor ingresa la descripción del plato"
+        regex={expressions.text}
+        status={description}
+        changeStatus={setDescription}
       />
       <Input
         tag="URL Imagen"
         type="text"
         name="image"
         placeholder="Ingrese la URL de la imagen"
-        text="Por favor ingresa la URL de la imagen"
-        regex=""
-        capture={captureImage}
+        textError="Por favor ingresa la URL de la imagen"
+        regex={expressions.url}
+        status={image}
+        changeStatus={setImage}
       />
       <div className="form__button">
-        <Button name="Agregar" action={choose} className="form__button" />
+        <Button name="Agregar" action={choose} />
       </div>
-      {false && <Message text="check" />}
+      {validForm === false && <Message text="alert" />}
+      {validForm === true && <Message text="check" />}
     </form>
   );
 };

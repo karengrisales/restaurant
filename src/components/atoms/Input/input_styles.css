@@ -1,4 +1,4 @@
-input {
+.container__input {
   width: 100%;
   border-radius: 3px;
   height: 45px;
@@ -8,22 +8,22 @@ input {
   border: 3px solid transparent;
 }
 
-input:focus {
+.container__input:focus {
   outline: none;
   border: 3px solid #f5d061;
   box-shadow: 3px 0 30px rgba(163, 163, 163, 0.4);
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+.container__input[type="number"]::-webkit-inner-spin-button,
+.container__input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input[type="number"] {
+.container__input[type="number"] {
   -moz-appearance: textfield;
 }
 
-label {
+.container__label {
   display: block;
   font-weight: bold;
   padding: 10px;
@@ -33,6 +33,26 @@ label {
 .container__p {
   font-size: 12px;
   margin-bottom: 0;
-  color: #da1212;
+  color: #f44336;
   display: none;
+}
+
+.container__input-correct {
+  border: 3px solid #4caf50;
+}
+
+.container__input-incorrect {
+  border: 3px solid #da1212;
+}
+
+.container__label-incorrect {
+  color: #da1212;
+}
+
+.container__p-correct {
+  display: none;
+}
+
+.container__p-incorrect {
+  display: block;
 }

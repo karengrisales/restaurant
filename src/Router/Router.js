@@ -4,6 +4,7 @@ import { FormAdd } from "../components/molecules/FormAdd/FormAdd";
 import { Login } from "../components/organisms/Login/Login";
 import { Dessert } from "../components/pages/Dessert/Dessert";
 import { Drink } from "../components/pages/Drink/Drink";
+import { Error } from "../components/pages/Error/Error";
 import { Home } from "../components/pages/Home/Home";
 import { MainCourse } from "../components/pages/MainCourse/MainCourse";
 import { Soup } from "../components/pages/Soup/Soup";
@@ -20,6 +21,7 @@ export const Router = () => {
       <Route path="/food" element={<Food />}></Route>
       <Route path="/add" element={<FormAdd />}></Route>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="*" element={<Error />}></Route>
     </Routes>
   );
 };
