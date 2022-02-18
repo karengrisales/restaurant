@@ -131,7 +131,7 @@ export const FormAdd = () => {
         options={options}
         text="Por favor elija el tipo de comida a agregar:"
         status={food}
-        cambio={setFood}
+        changeStatus={setFood}
         textError="Por favor selecciona una opción"
       />
       <Input

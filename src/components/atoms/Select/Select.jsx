@@ -1,10 +1,10 @@
 import "./select_styles.css";
 
 export const Select = (props) => {
-  const { options, text, name, status, cambio, textError } = props;
+  const { options, text, name, status, changeStatus, textError } = props;
 
   const onChange = (e) => {
-    cambio({ ...status, field: e.target.value });
+    changeStatus({ ...status, field: e.target.value });
   };
 
   var classNameSelect = "container__select";
@@ -13,9 +13,9 @@ export const Select = (props) => {
 
   const validation = () => {
     if (status.field === "Seleccione" || status.field === "") {
-      cambio({ ...status, valid: "false" });
+      changeStatus({ ...status, valid: "false" });
     } else {
-      cambio({ ...status, valid: "true" });
+      changeStatus({ ...status, valid: "true" });
     }
   };
 
